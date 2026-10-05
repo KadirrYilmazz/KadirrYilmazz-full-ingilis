@@ -1,3 +1,4 @@
+import { expansion } from "./vocabExpansion";
 export type Word={id:string;english:string;turkish:string;emoji:string;example:string;unit:number};
 export type Unit={id:number;title:string;turkish:string;emoji:string;words:Word[]};
 
@@ -15,5 +16,5 @@ const raw=[
 ] as const;
 
 export const units:Unit[]=raw.map((u,ui)=>({id:ui+1,title:u[0],turkish:u[1],emoji:u[2],words:u[3].map((w,wi)=>({id:`u${ui+1}-${wi+1}`,english:w[0],turkish:w[1],emoji:w[2],example:w[3],unit:ui+1}))}));
-export const allWords=units.flatMap(u=>u.words);
-export const getUnit=(id:number)=>units.find(u=>u.id===id);
+export const allWords=units.flatMap(u=>u.words).concat(expansion);
+export const getUnit=(id:number)=>{const unit=units.find(u=>u.id===id);return unit?{...unit,words:[...unit.words,...expansion.filter(w=>w.unit===id)]}:undefined;};
