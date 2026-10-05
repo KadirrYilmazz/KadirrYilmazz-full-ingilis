@@ -31,7 +31,7 @@ export default function Practice(){
 
  const q=questions[index];
  const type=(index%3)+1;
- const current=q?makeQuestion(q,type):null;
+ const current=useMemo(()=>q?makeQuestion(q,type):null,[q,type]);
 
  const answer=(option:string)=>{
    if(selected||!q||!current)return;
