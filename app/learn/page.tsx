@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useMemo,useState} from "react";
+import {useEffect,useState} from "react";
 import Link from "next/link";
 import {allWords,units,Word} from "../../lib/data";
 
@@ -9,7 +9,7 @@ export default function Learn(){
  const [unitId,setUnitId]=useState(1); const [index,setIndex]=useState(0); const [show,setShow]=useState(false);
  const [learned,setLearned]=useState<string[]>([]); const [options,setOptions]=useState<string[]>([]);
  const unit=units.find(u=>u.id===unitId)!; const word=unit.words[index%unit.words.length];
- useEffect(()=>{const saved=localStorage.getItem("full-ingilis-learned");if(saved)setLearned(JSON.parse(saved))},[]);
+ useEffect(()=>{const saved=localStorage.getItem("full-ingilis-learned");if(saved)setLearned(JSON.parse(saved));const requested=Number(new URLSearchParams(window.location.search).get("unit")||0);if(requested>=1&&requested<=units.length)setUnitId(requested)},[]);
  useEffect(()=>{setShow(false);setOptions(shuffle([word.turkish,...shuffle(allWords.filter(w=>w.id!==word.id)).slice(0,3).map(w=>w.turkish)]))},[word.id]);
  const mark=(ok:boolean)=>{if(ok&&!learned.includes(word.id)){const next=[...learned,word.id];setLearned(next);localStorage.setItem("full-ingilis-learned",JSON.stringify(next))}setIndex(i=>i+1);setShow(false)};
  return <main className="learn-page">
