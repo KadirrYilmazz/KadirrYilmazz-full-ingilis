@@ -16,7 +16,7 @@ export default function Home(){
  const filtered=useMemo(()=>units.filter(u=>(u[1]+" "+u[2]).toLowerCase().includes(query.toLowerCase())),[query]);
  return <main className="app">
   <aside className="sidebar">
-   <Link href="/" className="brand"><div className="brand-mark">F</div><div><strong>FULL</strong><span>İNGİLİŞ</span></div></div>
+   <Link href="/" className="brand"><div className="brand-mark">F</div><div><strong>FULL</strong><span>İNGİLİŞ</span></div></Link>
    <div className="side-label">MENÜ</div>
    {nav.map(n=><Link key={n[1]} href={n[2]} className={"nav "+(n[1]==="Ana Sayfa"?"active":"")}><span>{n[0]}</span>{n[1]}</Link>)}
    <div className="side-bottom"><div className="side-label">HEDEF</div><div className="goal-mini"><div className="goal-row"><span>Bugünkü hedef</span><b>18 / 20</b></div><div className="bar"><i style={{width:"90%"}}/></div><small>2 kelime daha, seri bozulmasın! 🔥</small></div><Link href="/settings" className="settings">⚙ Ayarlar</Link></div>
@@ -30,7 +30,7 @@ export default function Home(){
     </section>
     <div className="section-head"><div><h2>LGS Üniteleri</h2><p>Üniteleri sırayla tamamla, kelime haritanı doldur.</p></div><Link href="/learn" className="link-btn">Tümünü Gör →</Link></div>
     <section className="units">{filtered.map((u,i)=><article className="unit" key={u[0]}><div className="unit-top"><span className="unit-no">UNIT {u[0]}</span><span className="unit-emoji">{u[3]}</span></div><h3>{u[1]}</h3><p>{u[2]}</p><div className="progress-row"><span>{i<3?40+i*9:i===3?27:12}% tamamlandı</span><b>{i<3?28+i*5:0}/{u[4]}</b></div><div className="bar unit-bar"><i style={{width:(i<3?40+i*9:i===3?27:12)+"%"}}/></div><Link href={"/learn?unit="+Number(u[0])} className="unit-btn">Üniteye Git <span>→</span></Link></article>)}</section>
-    <section className="lower"><div className="panel"><div className="panel-head"><div><h2>Son Çalışmalar</h2><p>En son kaldığın yerden devam et.</p></div><Link href="/progress" className="link-btn">Geçmiş →</Link></div>{[["FRIENDLY","arkadaş canlısı","👋","100%"],["CROWDED","kalabalık","👥","80%"],["ADVENTURE","macera","🧭","60%"]].map(x=><Link href="/learn" className="word-row" key={x[0]}><div className="word-pic">{x[2]}</div><div className="word"><b>{x[0]}</b><span>{x[1]}</span></div><div className="tiny-progress"><i style={{width:x[3]}}/></div><span className="chev">→</span></div>)}</div>
+    <section className="lower"><div className="panel"><div className="panel-head"><div><h2>Son Çalışmalar</h2><p>En son kaldığın yerden devam et.</p></div><Link href="/progress" className="link-btn">Geçmiş →</Link></div>{[["FRIENDLY","arkadaş canlısı","👋","100%"],["CROWDED","kalabalık","👥","80%"],["ADVENTURE","macera","🧭","60%"]].map(x=><Link href="/learn" className="word-row" key={x[0]}><div className="word-pic">{x[2]}</div><div className="word"><b>{x[0]}</b><span>{x[1]}</span></div><div className="tiny-progress"><i style={{width:x[3]}}/></div><span className="chev">→</span></Link>)}</div>
     <div className="panel daily"><div className="panel-head"><div><h2>Bugünkü Hedef</h2><p>Seriyi korumaya devam et.</p></div><span className="target">90%</span></div><div className="ring"><div><strong>18</strong><span>/ 20 kelime</span></div></div><div className="daily-note">2 kelime kaldı. <b>5 dakikada</b> bitirebilirsin.</div><Link href="/learn" className="primary full">Hedefi Tamamla →</Link></div></section>
    </div>
   </section>
